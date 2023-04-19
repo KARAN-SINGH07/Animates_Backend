@@ -18,7 +18,6 @@
     var emailsendRouter = require('./routes/emailsend');
     const DB = process.env.DB
     var app = express();
-    console.log(DB)
     app.use(cors());
     // view engine setup
     app.set('views', path.join(__dirname, 'views'));
@@ -55,7 +54,7 @@
         next(createError(404));
     });
     //MongoDB connectivity with Mongoose starts here
-    
+    mongoose.set("strictQuery", false);
     mongoose.connect(DB,{
         useNewUrlParser:true,
         // useCreateIndex:true,
