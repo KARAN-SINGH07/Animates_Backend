@@ -7,6 +7,8 @@
     var mongoose = require('mongoose');
     var multer=require('multer');
     const upload=multer({dest: 'uploads/'})
+    const dotenv = require('dotenv')
+    dotenv.config({ path: './.env' });
 
     var indexRouter = require('./routes/index');
     var usersRouter = require('./routes/users');
@@ -14,9 +16,9 @@
     var otpRouter= require('./routes/otp');
     var productlistingRouter = require('./routes/productlisting');
     var emailsendRouter = require('./routes/emailsend');
-
+    const DB = process.env.DB
     var app = express();
-    
+    console.log(DB)
     app.use(cors());
     // view engine setup
     app.set('views', path.join(__dirname, 'views'));
@@ -53,16 +55,25 @@
         next(createError(404));
     });
     //MongoDB connectivity with Mongoose starts here
-    mongoose.connect('mongodb://127.0.0.1:27017/apkdatabase', { useNewUrlParser: true },
-        (err) => {
-            if (err) {
-                console.log(err)
-            } else {
-                console.log("Database Connected")
-            }
+    // const DB = "mongodb+srv://ks5754111:ks12345@apkdatabase.m5g0nlj.mongodb.net/?retryWrites=true&w=majority"
+    mongoose.connect(DB,{
+        useNewUrlParser:true,
+        // useCreateIndex:true,
+    }).then(()=>{
+        console.log('connection successfull')
+    }).catch((err)=>{
+        console.log('no connection to db')
+    })
+    // mongoose.connect('mongodb://127.0.0.1:27017/apkdatabase', { useNewUrlParser: true },
+    //     (err) => {
+    //         if (err) {
+    //             console.log(err)
+    //         } else {
+    //             console.log("Database Connected")
+    //         }
 
-        }
-    )
+    //     }
+    // )
 
 
 
