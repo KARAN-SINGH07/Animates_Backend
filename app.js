@@ -55,7 +55,7 @@
         next(createError(404));
     });
     //MongoDB connectivity with Mongoose starts here
-    // const DB = "mongodb+srv://ks5754111:ks12345@apkdatabase.m5g0nlj.mongodb.net/?retryWrites=true&w=majority"
+    
     mongoose.connect(DB,{
         useNewUrlParser:true,
         // useCreateIndex:true,
